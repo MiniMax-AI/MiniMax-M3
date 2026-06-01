@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 含敏感数据的 badcase(私密通道)
+    url: https://example.com/REPLACE_WITH_FEISHU_FORM
+    about: 公开 issue 请勿提交真实用户数据、API key、企业机密。涉密 badcase 请通过内部飞书表单提交(请仓库维护者替换 URL)。
+  - name: MiniMax-M3 文档
+    url: https://example.com/REPLACE_WITH_DOCS
+    about: 先查阅文档,排除已知限制或预期行为。
+  - name: MiniMax 开放平台社群
+    url: https://example.com/REPLACE_WITH_COMMUNITY
+    about: 一般使用咨询、接入答疑请通过社群,不在此处开 issue。
+  - name: 安全漏洞报告
+    url: https://example.com/REPLACE_WITH_SECURITY_CHANNEL
+    about: 安全漏洞请走私密通道,请勿公开提交。

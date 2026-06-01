@@ -1,0 +1,223 @@
+name: Badcase 报告
+description: 报告 MiniMax-M3 的输出错误、行为异常、工具调用问题、安全策略问题等
+title: "[badcase] "
+labels:
+  - badcase
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请完整描述 badcase 的现象与触发条件,所有 badcase 会进入 M3 团队的回归测试集。
+
+        **注意:本 issue 公开可见。** 请勿在正文中提交真实用户数据、API key 或企业机密。涉密 badcase 请通过 issue 入口的私密通道提交。
+
+  - type: textarea
+    id: one_liner
+    attributes:
+      label: 现象概述
+      description: 用一句话说明 badcase 的核心问题
+      placeholder: 同时查询上海与北京天气时,模型将两个城市的返回结果互换
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_input
+    attributes:
+      label: 用户输入 / 请求内容
+      description: 触发 badcase 的具体输入。多轮对话请贴完整对话,或在下方贴 JSON。
+      placeholder: |
+        What's the weather like in Shanghai and Beijing?
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_output
+    attributes:
+      label: 模型实际输出
+      description: 模型原文,逐字粘贴
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_output
+    attributes:
+      label: 预期输出
+      description: 正确的输出应当是什么样
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Badcase 分类
+      description: 选择最贴近的一项
+      options:
+        - 事实性错误 / 幻觉
+        - 答非所问 / 偏离问题
+        - 工具调用异常(参数错误 / 结果错绑 / tool_call_id 不匹配)
+        - 合理请求被拒绝(over-refusal)
+        - 安全策略失效 / 生成不当内容
+        - 未遵循 system prompt / 偏离指令
+        - 输出格式错误(JSON 破损 / Markdown 错位 / 字段缺失)
+        - 重复输出 / 死循环 / 异常消耗 token
+        - 多语言切换异常
+        - 思维链与最终结论矛盾
+        - 其他
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 复现环境
+
+  - type: dropdown
+    id: access
+    attributes:
+      label: 调用方式
+      options:
+        - Playground
+        - API 直连
+        - 通过 MCP
+        - 通过第三方 Agent 框架(LangChain / AutoGen / 其他)
+        - 接入了 M3 的产品 / Agent
+    validations:
+      required: true
+
+  - type: input
+    id: model_id
+    attributes:
+      label: 模型 ID / 版本
+      placeholder: MiniMax-M3
+    validations:
+      required: true
+
+  - type: textarea
+    id: decoding_params
+    attributes:
+      label: 解码参数
+      description: temperature / top_p / max_tokens / response_format / tool_choice / stream 等
+      placeholder: |
+        temperature: 1
+        top_p: 1
+        max_tokens: 2048
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: system_prompt
+    attributes:
+      label: System Prompt
+      description: 触发时使用的 system prompt(脱敏后),无可留空
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: payload
+    attributes:
+      label: 完整请求与响应(推荐填写)
+      description: |
+        贴 API 请求体与模型 raw 响应,JSON 格式。
+        涉及**工具调用、多轮对话、并行调用**的 badcase,缺少此项将显著影响根因定位——`tool_call_id`、`messages` 顺序、`tool_choice` 等关键信息均在其中。
+      render: json
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 描述他人可照此操作复现的最小步骤
+      placeholder: |
+        1. 在 Playground 选择 MiniMax-M3
+        2. 注册 weather_report 工具
+        3. 发送:What's the weather like in Shanghai and Beijing?
+        4. 工具按非调用顺序返回结果
+        5. 最终回答中两个城市的结果被互换
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reproducibility
+    attributes:
+      label: 复现稳定性
+      options:
+        - 每次均可复现
+        - 高概率复现(>50%)
+        - 偶发
+        - 仅出现一次
+        - 尚未尝试复现
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 影响评估
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 影响严重程度
+      options:
+        - Critical - 已在生产环境造成影响 / 已误导终端用户
+        - High - 静默错误,易蒙混过关至下游
+        - Medium - 需用户手动校验或绕过
+        - Low - 体验问题,存在可用 workaround
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: Badcase 发现来源
+      description: 用于帮助 M3 团队分析 badcase 来源分布
+      options:
+        - 自行使用时发现
+        - 客户 / 终端用户反馈
+        - 内部测试 / eval 集发现
+        - 复现他人公开案例
+        - 横向模型对比时发现
+        - 其他
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 补充信息(可选)
+
+  - type: textarea
+    id: other_models
+    attributes:
+      label: 其他模型对比
+      description: 同样输入在其他模型上的表现
+      placeholder: |
+        - GPT-4o:正常
+        - DeepSeek v4 Pro:正常
+        - MiniMax-M3:错位
+    validations:
+      required: false
+
+  - type: textarea
+    id: root_cause
+    attributes:
+      label: 怀疑根因 / 修复建议
+      description: 供 M3 团队参考
+    validations:
+      required: false
+
+  - type: textarea
+    id: attachments
+    attributes:
+      label: 截图 / 附件
+      description: 直接拖入文件
+    validations:
+      required: false
