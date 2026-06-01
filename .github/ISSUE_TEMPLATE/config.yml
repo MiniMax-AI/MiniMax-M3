@@ -7,7 +7,7 @@ contact_links:
     url: https://example.com/REPLACE_WITH_DOCS
     about: 先查阅文档,排除已知限制或预期行为。
   - name: MiniMax 开放平台社群
-    url: https://example.com/REPLACE_WITH_COMMUNITY
+    url: https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=84ds1e03-1eeb-4c14-b3d1-924ff5df9fc3
     about: 一般使用咨询、接入答疑请通过社群,不在此处开 issue。
   - name: 安全漏洞报告
     url: https://example.com/REPLACE_WITH_SECURITY_CHANNEL
