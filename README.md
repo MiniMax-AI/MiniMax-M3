@@ -4,7 +4,7 @@
 <hr>
 
 <p align="center">
-  <a href="https://agent.minimax.io/" target="_blank"><img src="https://img.shields.io/badge/MiniMax%20Agent-FF6C37?style=for-the-badge&logo=minimax&logoColor=white" alt="MiniMax Agent"></a>
+  <a href="https://agent.minimax.io/" target="_blank"><img src="https://img.shields.io/badge/MiniMax%20Code-FF6C37?style=for-the-badge&logo=minimax&logoColor=white" alt="MiniMax Code"></a>
   <a href="https://platform.minimax.io/docs/guides/text-generation" target="_blank"><img src="https://img.shields.io/badge/API-FF6C37?style=for-the-badge&logo=minimax&logoColor=white" alt="API"></a>
   <a href="https://www.minimax.io" target="_blank"><img src="https://img.shields.io/badge/MiniMax%20Website-FF6C37?style=for-the-badge&logo=minimax&logoColor=white" alt="MiniMax Website"></a>
   <br>
@@ -41,7 +41,7 @@ M3 is powered by [**MiniMax Sparse Attention (MSA)**](https://github.com/MiniMax
 
 ## How to Use
 
-- [MiniMax Agent](https://agent.minimax.io/)
+- [MiniMax Code](https://agent.minimax.io/)
 - [MiniMax API](https://platform.minimax.io/)
 
 M3 supports three reasoning modes through the `thinking` parameter:
